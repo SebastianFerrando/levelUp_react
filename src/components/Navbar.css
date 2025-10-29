@@ -1,0 +1,133 @@
+/* src/css/navbar.css */
+
+.navbar {
+  width: 100%;
+  height: 90px;
+  background-color: #000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 60px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 2px solid #39ff14;
+}
+
+/* Logo + título */
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.navbar-logo {
+  width: 55px;
+  height: auto;
+}
+
+.navbar-title {
+  color: #39ff14;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.8rem;
+  letter-spacing: 1px;
+  text-shadow: 0 0 10px #39ff14;
+}
+
+
+/* Enlaces */
+.navbar-links {
+  display: flex;
+  gap: 25px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-links a {
+  color: white;
+  text-decoration: none;
+  font-family: 'Orbitron', sans-serif;
+  transition: 0.3s;
+}
+
+.navbar-links a:hover {
+  color: #d3d3d3;
+}
+
+/* Botón de cierre de sesión */
+.btn-logout {
+  background-color: transparent;
+  border: 1px solid #00ffff;
+  color: #00ffff;
+  border-radius: 5px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-family: 'Orbitron', sans-serif;
+  transition: 0.3s;
+}
+
+.btn-logout:hover {
+  background-color: #00ffff;
+  color: black;
+}
+
+/* =========================================
+   ESTILOS DEL DROPDOWN (NUEVOS ESTILOS)
+========================================= */
+
+/* Contenedor del enlace Productos */
+.dropdown {
+    position: relative; /* Clave para posicionar el menú respecto a este elemento */
+    list-style: none; /* Asegura que no haya viñetas */
+    padding: 0;
+    margin: 0;
+}
+
+/* Enlace principal (Productos) */
+.dropdown-link {
+    /* Mantiene los estilos del navbar-links a */
+    display: block; 
+    padding: 0;
+}
+
+/* Menú desplegable (Ofertas) */
+.dropdown-menu {
+    position: absolute;
+    top: 100%; /* Coloca el menú justo debajo del enlace "Productos" */
+    left: 50%;
+    transform: translateX(-50%); /* Centra el menú horizontalmente bajo el enlace */
+    
+    list-style: none;
+    padding: 10px 0;
+    margin: 0;
+    
+    background-color: #111; /* Fondo oscuro más sutil */
+    border: 1px solid #39ff14; /* Borde verde neón */
+    border-top: none; /* Quitamos el borde superior para que se vea continuo con el navbar */
+    border-radius: 0 0 5px 5px;
+    
+    min-width: 150px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    z-index: 1050; /* Asegura que esté por encima de otros elementos */
+}
+
+/* Items del menú desplegable */
+.dropdown-menu li {
+    padding: 0;
+    margin: 0;
+}
+
+.dropdown-menu a {
+    /* Estilo para los enlaces internos del dropdown (como Ofertas) */
+    display: block;
+    padding: 8px 15px;
+    color: #fff;
+    text-align: center;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.dropdown-menu a:hover {
+    background-color: #39ff14; /* Fondo verde neón al pasar el mouse */
+    color: #000; /* Texto negro */
+}
