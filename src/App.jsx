@@ -8,12 +8,14 @@ import Blogs from "./pages/Blogs";
 import Contacto from "./pages/Contacto";
 import Productos from "./pages/Productos";
 import Detalle from "./pages/Detalle";
-import Administrador from "./pages/Administrador";
 import Carrito from "./pages/Carrito";
 import Checkout from "./pages/Checkout";
 import CompraExitosa from "./pages/CompraExitosa";
 import CompraError from "./pages/CompraError";
 import Ofertas from "./pages/Ofertas";
+import AdminHome from './pages/AdminHome';
+import AdminProductos from './pages/AdminProductos';
+import AdminUsuarios from './pages/AdminUsuarios';
 import PrivateRoute from "./components/PrivateRoute";
 import "./components/Carousel.css";
 
@@ -35,14 +37,13 @@ function App() {
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/compra-exitosa" element={<CompraExitosa />} />
         <Route path="/compra-error" element={<CompraError />} />
-        <Route
-          path="/administrador"
-          element={
-            <PrivateRoute requireAdmin={true}>
-              <Administrador />
-            </PrivateRoute>
-          }
-        />
+        <Route element={<PrivateRoute />}>
+          {/* Home del administrador */}
+          <Route path="/administrador" element={<AdminHome />} />
+          {/* Rutas de gestión */}
+          <Route path="/admin-productos" element={<AdminProductos />} />
+          <Route path="/admin-usuarios" element={<AdminUsuarios />} />
+        </Route>
 
       </Routes>
       <Footer />

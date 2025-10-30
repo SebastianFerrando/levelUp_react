@@ -1,13 +1,10 @@
-// src/pages/Productos.jsx
 import { useState, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { obtenerProductos } from "../js/crudProductos";
 import { inicializarProductos } from "../js/productos";
 
-// Función auxiliar para obtener la clave única del carrito basada en el usuario
 const obtenerClaveCarrito = () => {
   const usuario = JSON.parse(localStorage.getItem("usuarioLogeado"));
-  // Si hay un usuario, usa su correo; si no, usa una clave anónima.
   return usuario ? `carrito_${usuario.correo}` : "carrito_anonimo";
 };
 
@@ -15,7 +12,6 @@ export default function Productos() {
   const [productos, setProductos] = useState([]);
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("todos");
   
-  // INICIALIZACIÓN: Carga el carrito específico del usuario actual
   const [carrito, setCarrito] = useState(() => {
     const clave = obtenerClaveCarrito();
     return JSON.parse(localStorage.getItem(clave)) || [];
@@ -25,29 +21,25 @@ export default function Productos() {
     inicializarProductos(); 
     setProductos(obtenerProductos());
     
-    // Al montar, re-lee el carrito para asegurarse de que sea el correcto para el usuario
     const clave = obtenerClaveCarrito();
     setCarrito(JSON.parse(localStorage.getItem(clave)) || []);
 
   }, []);
 
-  // OBTENER LISTA ÚNICA DE CATEGORÍAS (para el selector)
   const categorias = useMemo(() => {
     const lista = productos.map((p) => p.categoria);
     return ["todos", ...new Set(lista)];
   }, [productos]);
 
-  // FILTRAR PRODUCTOS BASADO EN LA CATEGORÍA SELECCIONADA
   const productosFiltrados = productos.filter((p) => {
     if (categoriaSeleccionada === "todos") {
       return true;
     }
-    // Asume que la propiedad 'categoria' existe en cada producto
     return p.categoria === categoriaSeleccionada; 
   });
 
   const guardarCarrito = (nuevo) => {
-    const clave = obtenerClaveCarrito(); // Usa la clave actual del usuario/anónimo
+    const clave = obtenerClaveCarrito();
     setCarrito(nuevo);
     localStorage.setItem(clave, JSON.stringify(nuevo));
   };
@@ -74,7 +66,6 @@ export default function Productos() {
     <div className="container">
       <h2 className="titulo text-center">Nuestros Productos</h2>
 
-      {/* COMPONENTE DE FILTRADO DE CATEGORÍAS */}
       <div className="filter-controls">
         <label htmlFor="categoria-select">Filtrar por categoría:</label>
         <select

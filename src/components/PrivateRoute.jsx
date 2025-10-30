@@ -1,20 +1,43 @@
-import { Navigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Navigate, Outlet } from "react-router-dom";
 
-export default function PrivateRoute({ children, requireAdmin = false }) {
-  const usuario = JSON.parse(localStorage.getItem("usuarioLogeado"));
+export default function PrivateRoute() {
+    
+    // Estado para controlar si ya terminamos de leer localStorage
+    const [cargando, setCargando] = useState(true);
+    // Estado para almacenar el resultado de la verificación de permisos
+    const [esAdmin, setEsAdmin] = useState(false);
 
-  // Si no hay sesión activa, redirige al login
-  if (!usuario) {
-    alert("Debes iniciar sesión para acceder a esta página.");
-    return <Navigate to="/login" replace />;
-  }
+    useEffect(() => {
+        const verificarAdmin = () => {
+            const usuarioString = localStorage.getItem("usuarioLogeado");
+            let usuario = null;
 
-  // Si se requiere rol admin y no lo tiene
-  if (requireAdmin && usuario.rol !== "admin") {
-    alert("Acceso denegado: solo administradores pueden ingresar.");
-    return <Navigate to="/" replace />;
-  }
+            if (usuarioString) {
+                try {
+                    usuario = JSON.parse(usuarioString);
+                } catch (error) {
+                    console.error("Error al parsear usuario de localStorage:", error);
+                }
+            }
+            
+            const isAdmin = usuario && usuario.isAdmin === true;
+            
+            setEsAdmin(isAdmin);
+            setCargando(false);
+        };
 
-  // Todo correcto → muestra el contenido
-  return children;
+        verificarAdmin();
+    }, []); 
+
+    if (cargando) {
+        return <div className="container text-center mt-5">Verificando permisos...</div>;
+    }
+
+    if (esAdmin) {
+        return <Outlet />;
+    } else {
+        alert(" Acceso denegado: solo administradores pueden ingresar.");
+        return <Navigate to="/" />; 
+    }
 }

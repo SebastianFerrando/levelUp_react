@@ -1,8 +1,6 @@
-// src/pages/Checkout.jsx
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 
-// Función auxiliar para obtener la clave única del carrito (¡IDÉNTICA a la usada en otros componentes!)
 const obtenerClaveCarrito = () => {
   const usuario = JSON.parse(localStorage.getItem("usuarioLogeado"));
   return usuario ? `carrito_${usuario.correo}` : "carrito_anonimo";
@@ -14,11 +12,9 @@ export default function Checkout() {
   const [direccion, setDireccion] = useState("");
   const [tarjeta, setTarjeta] = useState("");
 
-  // 💾 Al montar el componente, verificar si hay usuario logueado
   useEffect(() => {
     const usuario = JSON.parse(localStorage.getItem("usuarioLogeado"));
     if (usuario) {
-      // Aseguramos que se usan los valores del usuario logueado para autocompletar
       setNombre(usuario.nombre || "");
       setDireccion(usuario.direccion || "");
     }
@@ -27,22 +23,17 @@ export default function Checkout() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // 1. Validaciones
     if (nombre.trim() === "" || direccion.trim() === "" || tarjeta.trim() === "") {
       alert("Por favor completa todos los campos.");
-      // Navega a la página de error si hay campos vacíos
       navigate("/compra-error");
       return;
     }
 
-    // **NOTA:** Aquí es donde deberías integrar tu función de validación de formulario, 
+    // Aquí es donde deberías integrar tu función de validación de formulario, 
     // pero como aún no la revisamos, mantendremos la validación simple por ahora.
-
-    // 2. COMPRA EXITOSA: Limpiar el carrito específico
     const claveCarrito = obtenerClaveCarrito();
-    localStorage.removeItem(claveCarrito); // <--- CORRECCIÓN CRÍTICA
+    localStorage.removeItem(claveCarrito);
 
-    // 3. Navegar a éxito
     navigate("/compra-exitosa");
   };
 

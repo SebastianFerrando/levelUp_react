@@ -1,34 +1,29 @@
-// src/pages/Ofertas.jsx
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { obtenerProductos } from "../js/crudProductos"; // Necesitas esta función
-import { inicializarProductos } from "../js/productos"; // Si lo usas para asegurar la carga
+import { obtenerProductos } from "../js/crudProductos";
+import { inicializarProductos } from "../js/productos";
 
-// Constante para el descuento global en ofertas
-const DESCUENTO_OFERTA = 0.20; // 20% de descuento
+const DESCUENTO_OFERTA = 0.20;
 
 export default function Ofertas() {
   const [productos, setProductos] = useState([]);
   
   useEffect(() => {
-    // Aseguramos que la lista de productos esté cargada
     inicializarProductos(); 
     
-    // Obtenemos todos los productos
     const productosBase = obtenerProductos();
     
-    // Filtramos para obtener solo algunos productos para las ofertas (ej. los 6 más caros)
     const ofertasSeleccionadas = productosBase
-      .sort((a, b) => b.precio - a.precio) // Ordenar por precio descendente
-      .slice(0, 6) // Tomar los primeros 6
+      .sort((a, b) => b.precio - a.precio)
+      .slice(0, 6) 
       .map(p => {
         const precioOriginal = p.precio;
         const precioOferta = Math.round(precioOriginal * (1 - DESCUENTO_OFERTA));
         return {
           ...p,
           precioOriginal,
-          precio: precioOferta, // Reemplazamos el precio para el carrito/detalle
-          descuento: DESCUENTO_OFERTA * 100 // Para mostrar en el card
+          precio: precioOferta,
+          descuento: DESCUENTO_OFERTA * 100
         };
       });
 
@@ -36,13 +31,13 @@ export default function Ofertas() {
 
   }, []);
 
-  // NOTA: Para que estos productos se puedan añadir al carrito, 
+  // Para que estos productos se puedan añadir al carrito, 
   // necesitarías importar la función 'agregar' de Productos.jsx o implementarla aquí.
   // Por ahora, solo mostraremos la oferta y un botón para 'Ver detalle'.
   
   return (
     <div className="container">
-      <h2 className="titulo text-center">🔥 ¡Ofertas del Mes! 🔥</h2>
+      <h2 className="titulo text-center">¡Ofertas del Mes! </h2>
       <p className="text-center" style={{ color: '#ff0044', fontSize: '1.2rem', marginBottom: '30px' }}>
         Aprovecha un {DESCUENTO_OFERTA * 100}% de descuento en estos productos seleccionados.
       </p>

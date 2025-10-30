@@ -1,4 +1,3 @@
-// src/pages/Registro.jsx
 import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { crearUsuario } from "../js/crudUsuarios"; 
@@ -13,7 +12,6 @@ import {
 export default function Registro() {
     const navigate = useNavigate();
     
-    // Estados para todos los campos
     const [nombre, setNombre] = useState("");
     const [correo, setCorreo] = useState("");
     const [confirmCorreo, setConfirmCorreo] = useState("");
@@ -23,7 +21,6 @@ export default function Registro() {
     const [region, setRegion] = useState("");
     const [comuna, setComuna] = useState("");
     
-    // Obtener las comunas disponibles basado en la región seleccionada
     const comunasDisponibles = useMemo(() => {
         return comunasPorRegion[region] || [];
     }, [region]);
@@ -31,7 +28,6 @@ export default function Registro() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        // 1. VALIDACIONES DE CAMPOS
         if (!validarLongitud(nombre, 100, 1)) {
             alert("El nombre es obligatorio y debe tener máximo 100 caracteres.");
             return;
@@ -62,13 +58,11 @@ export default function Registro() {
             return;
         }
         
-        // Asumiendo que región y comuna son obligatorias
         if (!region || !comuna) {
             alert("Debe seleccionar una región y una comuna.");
             return;
         }
 
-        // 2. CREAR Y GUARDAR USUARIO
         const nuevoUsuario = {
             nombre: nombre,
             correo: correo,
@@ -79,10 +73,10 @@ export default function Registro() {
         };
         
         if (crearUsuario(nuevoUsuario)) {
-            alert("✅ Registro exitoso. ¡Ahora puedes iniciar sesión!");
+            alert("Registro exitoso. ¡Ahora puedes iniciar sesión!");
             navigate("/login");
         } else {
-            alert("❌ Error: El correo ya se encuentra registrado.");
+            alert("Error: El correo ya se encuentra registrado.");
         }
     };
     
@@ -106,7 +100,6 @@ export default function Registro() {
                 <label>Teléfono (Opcional)</label>
                 <input type="tel" value={telefono} onChange={(e) => setTelefono(e.target.value)} />
                 
-                {/* SELECTORES DE REGIÓN Y COMUNA */}
                 <label htmlFor="region">Región</label>
                 <select id="region" className="form-control" value={region} onChange={(e) => {setRegion(e.target.value); setComuna("");}} required>
                     <option value="">--Seleccione una Región</option>

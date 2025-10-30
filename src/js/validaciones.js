@@ -1,15 +1,9 @@
-// src/js/validaciones.js
-
-// =========================================
-// 1. UTILIDADES DE VALIDACIÓN
-// =========================================
-
 export const CORREOS_VALIDOS = ["duoc.cl", "profesor.duoc.cl", "gmail.com"];
 
 /**
  * Valida que el correo pertenezca a uno de los dominios permitidos.
- * @param {string} correo - El correo a validar.
- * @returns {boolean} True si el dominio es válido.
+ * @param {string} correo
+ * @returns {boolean}
  */
 export function validarDominioCorreo(correo) {
     if (!correo) return false;
@@ -18,8 +12,8 @@ export function validarDominioCorreo(correo) {
 
 /**
  * Valida la longitud de la contraseña.
- * @param {string} pass - La contraseña a validar.
- * @returns {boolean} True si tiene entre 4 y 10 caracteres.
+ * @param {string} pass
+ * @returns {boolean}
  */
 export function validarPass(pass) {
     return pass && pass.length >= 4 && pass.length <= 10;
@@ -27,31 +21,28 @@ export function validarPass(pass) {
 
 /**
  * Valida el formato del número de teléfono (opcional).
- * @param {string} telefono - El teléfono a validar.
- * @returns {boolean} True si el formato es válido (8 a 12 dígitos) o si está vacío.
- */
+ * @param {string} telefono
+ * @returns {boolean}
+ * */
 export function validarTelefono(telefono) {
     const t = telefono ? telefono.trim() : "";
-    if (!t) return true; // Es opcional
+    if (!t) return true;
     return /^[0-9]{8,12}$/.test(t);
 }
 
 /**
  * Valida la longitud de campos de texto.
- * @param {string} texto - El texto a validar.
- * @param {number} max - Longitud máxima permitida.
- * @param {number} min - Longitud mínima permitida (por defecto 1).
- * @returns {boolean} True si la longitud es válida.
+ * @param {string} texto
+ * @param {number} max
+ * @param {number} min
+ * @returns {boolean}
  */
 export function validarLongitud(texto, max, min = 1) {
     const t = texto ? texto.trim() : "";
     return t.length >= min && t.length <= max;
 }
 
-
-// =========================================
 // 2. DATA DE REGIONES Y COMUNAS
-// =========================================
 
 export const comunasPorRegion = {
     "Arica y Parinacota": ["Arica", "Camarones", "Putre", "General Lagos"],

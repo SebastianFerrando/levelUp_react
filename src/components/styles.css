@@ -1,6 +1,4 @@
-/* =========================================
-   ESTILOS GENERALES
-========================================= */
+/*ESTILOS GENERALES*/
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap');
 
 body {
@@ -10,7 +8,11 @@ body {
   font-family: 'Orbitron', sans-serif;
 }
 
-h1, h2, h3, h4, h5 {
+h1,
+h2,
+h3,
+h4,
+h5 {
   color: #39ff14;
 }
 
@@ -25,9 +27,62 @@ a {
   text-decoration: none;
 }
 
-/* =========================================
-   BOTONES
-========================================= */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #000000;
+  border-bottom: 2px solid #39ff14;
+  padding: 10px 40px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.navbar-logo a {
+  color: #39ff14;
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.navbar-links a {
+  color: #00ffff;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 5px 10px;
+  transition: color 0.3s, background-color 0.3s;
+  white-space: nowrap;
+}
+
+.navbar-links a:hover {
+  color: #000000;
+  background-color: #39ff14;
+  border-radius: 4px;
+}
+
+.btn-logout {
+  background-color: #ff4444;
+  color: #000;
+  border: none;
+  padding: 8px 15px;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+  white-space: nowrap;
+}
+
+.btn-logout:hover {
+  background-color: #ff0000;
+}
+
+/*BOTONES*/
 .btn-ir {
   background-color: #00ffff;
   border: none;
@@ -64,9 +119,7 @@ a {
   border: 1px solid #39ff14;
 }
 
-/* =========================================
-   FORMULARIOS
-========================================= */
+/*FORMULARIOS*/
 .form-container {
   max-width: 500px;
   margin: 50px auto;
@@ -106,9 +159,7 @@ a {
   box-shadow: 0 0 5px #00ffff;
 }
 
-/* =========================================
-   CARDS DE PRODUCTOS / BLOGS
-========================================= */
+/*CARDS DE PRODUCTOS / BLOGS*/
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -147,105 +198,42 @@ a {
   color: #d3d3d3;
 }
 
-/* =========================================
-   DETALLE DE PRODUCTO
-========================================= */
-/* =========================================
-   DETALLE DE PRODUCTO (Asegura estos estilos)
-========================================= */
-
-/* Contenedor principal del detalle, usa flex para organizar */
 .detalle-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: flex-start; /* Alineación al inicio para info */
+  align-items: flex-start;
   padding: 40px;
   gap: 30px;
-  max-width: 1000px; /* Limita el ancho para centrar */
+  max-width: 1000px;
   margin: 0 auto;
 }
 
-/* Contenedor de la Imagen */
 .detalle-img {
-  /* Fija un tamaño base para el contenedor */
-  width: 400px; 
+  width: 400px;
   height: 400px;
   border: 2px solid #39ff14;
   border-radius: 10px;
   padding: 10px;
-  background-color: #050505; /* Fondo ligeramente oscuro para contraste */
+  background-color: #050505;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* La imagen dentro del contenedor */
 .detalle-img-wrapper img {
-  width: 100%; /* La imagen toma el ancho completo del wrapper */
-  height: 100%; /* La imagen toma el alto completo del wrapper */
-  /* Propiedad CLAVE: Contiene la imagen dentro del contenedor sin recortarla */
-  object-fit: contain; 
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
   border-radius: 5px;
 }
 
 
 .detalle-info {
-  max-width: 5000px; /* Asegura que la información tenga espacio */
+  max-width: 5000px;
 }
 
-
-/* =========================================
-   ADMINISTRADOR
-========================================= */
-.admin-layout {
-  display: flex;
-  min-height: 80vh;
-}
-
-.sidebar {
-  width: 220px;
-  background: #111;
-  padding: 20px;
-  color: #39ff14;
-  border-right: 2px solid #00ffff;
-}
-
-.sidebar h3 {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.sidebar ul {
-  list-style: none;
-  padding: 0;
-}
-
-.sidebar a {
-  display: block;
-  color: #fff;
-  text-decoration: none;
-  margin: 10px 0;
-  padding: 8px;
-  border-radius: 5px;
-  transition: 0.3s;
-}
-
-.sidebar a:hover {
-  background-color: #00ffff;
-  color: #000;
-}
-
-.admin-content {
-  flex: 1;
-  background-color: #000;
-  color: #fff;
-  padding: 40px;
-}
-
-/* =========================================
-   FOOTER
-========================================= */
+/*FOOTER*/
 footer {
   background-color: #111;
   color: #d3d3d3;
@@ -267,9 +255,7 @@ footer {
 }
 
 
-/* =========================================
-   RESPONSIVE
-========================================= */
+/*RESPONSIVE*/
 @media (max-width: 768px) {
   .detalle-container {
     flex-direction: column;
@@ -297,7 +283,7 @@ footer {
 
 .home-container {
   text-align: center;
-  margin-top: 80px; /* espacio debajo del navbar */
+  margin-top: 80px;
 }
 
 .home-container h1 {

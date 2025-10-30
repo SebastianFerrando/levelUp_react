@@ -1,9 +1,6 @@
-// src/pages/Carrito.jsx
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-// ASUMIMOS que tienes una función para obtener el stock (si es necesario)
 
-// Función auxiliar para obtener la clave única del carrito (DEBE SER IGUAL A LA DE PRODUCTOS.JSX)
 const obtenerClaveCarrito = () => {
   const usuario = JSON.parse(localStorage.getItem("usuarioLogeado"));
   return usuario ? `carrito_${usuario.correo}` : "carrito_anonimo";
@@ -12,20 +9,17 @@ const obtenerClaveCarrito = () => {
 export default function Carrito() {
   const navigate = useNavigate();
   
-  // 1. Inicializa el carrito leyendo desde la clave única del usuario/anónimo
   const [carrito, setCarrito] = useState(() => {
     const clave = obtenerClaveCarrito();
     return JSON.parse(localStorage.getItem(clave)) || [];
   });
 
-  // 2. Función para guardar y actualizar el estado
   const guardarCarrito = (nuevo) => {
     const clave = obtenerClaveCarrito();
     setCarrito(nuevo);
     localStorage.setItem(clave, JSON.stringify(nuevo));
   };
   
-  // Lógica de manipulación del carrito (Asegúrate de que tus funciones usen guardarCarrito)
   
   const vaciar = () => guardarCarrito([]);
 
@@ -38,11 +32,10 @@ export default function Carrito() {
     const nuevo = carrito.map((item) => {
       if (item.id === id) {
         const nuevaCantidad = item.cantidad + delta;
-        // Evitar cantidades menores a 1 (o eliminar si llega a 0)
         return nuevaCantidad > 0 ? { ...item, cantidad: nuevaCantidad } : null;
       }
       return item;
-    }).filter(Boolean); // Elimina los nulos (ítems con cantidad 0)
+    }).filter(Boolean);
     
     guardarCarrito(nuevo);
   };

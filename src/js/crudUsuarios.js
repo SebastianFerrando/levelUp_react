@@ -1,36 +1,62 @@
-// src/js/crudUsuarios.js
+const CLAVE_USUARIOS = "usuarios"; 
 
-// Clave donde se guardan todos los usuarios registrados
-const CLAVE_USUARIOS = "usuariosRegistrados"; 
-
-// Lee todos los usuarios registrados
+/**
+Obtiene la lista de usuarios registrados desde localStorage.
+@returns {Array}
+ */
 export const obtenerUsuarios = () => {
     return JSON.parse(localStorage.getItem(CLAVE_USUARIOS)) || [];
 };
 
-// Guarda un nuevo usuario
-export const crearUsuario = (usuario) => {
+/**
+ * Valida las credenciales de un usuario.
+ * @param {string} correo
+ * @param {string} password
+ * @returns {object | null}
+ */
+export const validarCredenciales = (correo, password) => {
     const usuarios = obtenerUsuarios();
     
-    // Verificar si el correo ya existe
-    if (usuarios.find(u => u.correo === usuario.correo)) {
-        return false; // Retorna false si el usuario ya está registrado
-    }
-    
-    usuarios.push(usuario);
-    localStorage.setItem(CLAVE_USUARIOS, JSON.stringify(usuarios));
-    return true; // Retorna true si el registro fue exitoso
-};
-
-// Verifica las credenciales de un usuario para iniciar sesión
-export const validarCredenciales = (correo, pass) => {
-    const usuarios = obtenerUsuarios();
-    
-    // Buscar un usuario que coincida con correo Y contraseña
-    const usuarioEncontrado = usuarios.find(
-        u => u.correo === correo && u.pass === pass
+    const usuarioEncontrado = usuarios.find(u => 
+        u.correo === correo && u.password === password
     );
     
-    // Retorna el objeto del usuario si existe, o null si no
     return usuarioEncontrado || null;
+};
+
+/**
+ * Crea y guarda un nuevo usuario en localStorage.
+ * @param {object} nuevoUsuario
+ * @returns {object}
+ */
+export const crearUsuario = (nuevoUsuario) => {
+    let usuarios = obtenerUsuarios();
+    
+    if (usuarios.find(u => u.correo === nuevoUsuario.correo)) {
+        return { success: false, message: "El correo ya está registrado." };
+    }
+    
+    usuarios.push(nuevoUsuario);
+    
+    localStorage.setItem(CLAVE_USUARIOS, JSON.stringify(usuarios));
+    
+    return { success: true, message: "Usuario registrado exitosamente." };
+};
+
+/**
+ * Elimina un usuario por su correo electrónico.
+ * @param {string} correo
+ * @returns {object}
+ */
+export const eliminarUsuario = (correo) => {
+    let usuarios = obtenerUsuarios();
+    
+    const usuariosFiltrados = usuarios.filter(u => u.correo !== correo);
+    
+    if (usuarios.length === usuariosFiltrados.length) {
+        return { success: false, message: "Usuario no encontrado." };
+    }
+    
+    localStorage.setItem(CLAVE_USUARIOS, JSON.stringify(usuariosFiltrados));
+    return { success: true, message: "Usuario eliminado exitosamente." };
 };

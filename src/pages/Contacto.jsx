@@ -1,6 +1,4 @@
-// src/pages/Contacto.jsx
 import { useState } from "react";
-// Importar solo las validaciones necesarias
 import { validarDominioCorreo, validarLongitud } from "../js/validaciones"; 
 
 export default function Contacto() {
@@ -11,7 +9,6 @@ export default function Contacto() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        // VALIDACIONES
         if (!validarLongitud(nombre, 100, 1)) {
             alert("El nombre es obligatorio y debe tener máximo 100 caracteres.");
             return;
@@ -27,10 +24,8 @@ export default function Contacto() {
             return;
         }
 
-        // Si todas las validaciones pasan
-        alert("✅ Mensaje enviado correctamente.");
+        alert(" Mensaje enviado correctamente.");
         
-        // Limpiar formulario (resetear los estados)
         setNombre("");
         setCorreo("");
         setMensaje("");
