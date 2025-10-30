@@ -29,7 +29,8 @@ export default function Detalle() {
   useEffect(() => {
     inicializarProductos();
 
-    const p = obtenerProductoPorId(id);
+    const idNum = parseInt(id, 10); // convertir id a número
+    const p = obtenerProductoPorId(idNum);
     setProducto(p);
 
     setTodosLosProductos(obtenerProductos());
@@ -43,7 +44,7 @@ export default function Detalle() {
 
     return todosLosProductos
       .filter(
-        (p) => p.categoria === producto.categoria && p.id !== producto.id
+        (p) => p.categoria.toLowerCase() === producto.categoria.toLowerCase() && p.id !== producto.id
       )
       .slice(0, 4);
   }, [producto, todosLosProductos]);

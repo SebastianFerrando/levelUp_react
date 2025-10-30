@@ -318,3 +318,84 @@ footer {
   border: 1px solid rgba(57,255,20,0.15);
   border-radius: 8px;
 }
+
+/* ADMIN PRODUCTOS */
+.admin-container {
+  margin: 20px;
+}
+
+.form-admin {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  color: #00ffff;
+  margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  background-color: #000;
+  border: 1px solid #39ff14;
+  color: #fff;
+  padding: 6px;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #00ffff;
+  box-shadow: 0 0 5px #00ffff;
+}
+
+.table-admin {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 8px;
+  margin-top: 5px;
+}
+
+.table-admin th,
+.table-admin td {
+  padding: -5px 20px;
+  text-align: left;
+}
+
+.stock-critico {
+  color: #ff4444;
+}
+
+.stock-normal {
+  color: #39ff14;
+}
+
+.no-productos {
+  text-align: center;
+  color: #aaa;
+  margin-top: 10px;
+}
+
+.table-admin th:last-child,
+.table-admin td:last-child {
+  padding-right: 300px;
+  text-align: center;
+}
+
+/* Ajusta el padding de la columna "Stock" */
+.table-admin th:nth-child(5),
+.table-admin td:nth-child(5) {
+  padding-right: 50px; /* ajusta el valor según lo necesites */
+  text-align: center;
+}
+

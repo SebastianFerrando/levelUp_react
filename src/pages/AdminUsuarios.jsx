@@ -12,17 +12,12 @@ export default function AdminUsuarios() {
     }, []);
 
     const recargarUsuarios = () => {
-        // Asegúrate de que obtenerUsuarios() NO incluya al admin.
         setUsuarios(obtenerUsuarios());
     };
 
-    // Eliminar un usuario lo borra de localStorage.
-    // Al intentar iniciar sesión, la lógica de Login.jsx buscará en localStorage, 
-    // y al no encontrarlo, el inicio de sesión fallará.
     const handleEliminarUsuario = (correo, nombre) => {
         if (window.confirm(`¿Estás seguro de eliminar al usuario "${nombre}" (${correo})?`)) {
 
-            //No permitir al administrador eliminarse a sí mismo
             const usuarioLogeado = JSON.parse(localStorage.getItem('usuarioLogeado'));
             if (usuarioLogeado && usuarioLogeado.correo === correo) {
                 alert("❌ No puedes eliminar la cuenta de administrador activa.");
@@ -40,10 +35,12 @@ export default function AdminUsuarios() {
     };
 
     return (
-        <div className="container p-4">
+        <div className="container p-4" style={{ padding: '30px 20px' }}>
             <h1 className="titulo text-center">Administración de Usuarios</h1>
 
-            <h2 className="sub-titulo text-center" style={{ color: '#00ffff', marginTop: '20px' }}>Usuarios Registrados ({usuarios.length})</h2>
+            <h2 className="sub-titulo text-center" style={{ color: '#00ffff', marginTop: '20px' }}>
+                Usuarios Registrados ({usuarios.length})
+            </h2>
 
             <div className="table-responsive">
                 <table className="table table-dark table-striped mt-3">
