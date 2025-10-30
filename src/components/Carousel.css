@@ -1,0 +1,39 @@
+.carousel-home {
+  position: relative;
+  width: 90%;
+  max-width: 800px;
+  margin: 40px auto;
+  border: 2px solid #39ff14;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.carousel-home img {
+  width: 100%;
+  height: auto;
+  max-height: 650px;
+  object-fit: cover;
+}
+
+.carousel-home .controls {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+}
+
+.carousel-home button {
+  background: rgba(0, 0, 0, 0.6);
+  color: #39ff14;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 10px;
+  transition: 0.3s;
+}
+
+.carousel-home button:hover {
+  color: #00ffff;
+}
