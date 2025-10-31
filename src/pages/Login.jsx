@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { validarCredenciales } from "../js/crudUsuarios"; 
+import { validarCredenciales } from "../js/crudUsuarios";
 
 export default function Login() {
     const [correo, setCorreo] = useState("");
@@ -18,24 +18,28 @@ export default function Login() {
             );
             localStorage.setItem("isLoggedIn", "true");
             navigate("/administrador");
-            return; 
-        }
-
-        const usuarioExistente = validarCredenciales(correo, pass);
-
-        if (!usuarioExistente) {
-            alert("Error: Correo o Contraseña incorrectos, o el usuario no está registrado.");
             return;
         }
 
-        alert(`Inicio de sesión exitoso. Bienvenido(a), ${usuarioExistente.nombre}.`);
+        const usuario = validarCredenciales(correo, pass);
 
-        localStorage.setItem("usuarioLogeado", JSON.stringify({
-            ...usuarioExistente,
-            isAdmin: false 
-        }));
+        if (usuario) {
+            alert(`Bienvenido ${usuario.nombre}`);
 
-        navigate("/");
+            localStorage.setItem(
+                "usuarioLogeado",
+                JSON.stringify({
+                    ...usuario,
+                    isAdmin: false
+                })
+            );
+            localStorage.setItem("isLoggedIn", "true");
+
+            navigate("/productos");
+            return;
+        } else {
+            alert("Error: Correo o contraseña incorrectos.");
+        }
     };
 
     return (

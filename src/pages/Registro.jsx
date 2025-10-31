@@ -66,17 +66,19 @@ export default function Registro() {
         const nuevoUsuario = {
             nombre: nombre,
             correo: correo,
-            pass: pass, 
+            password: pass, 
             telefono: telefono,
             region: region,
             comuna: comuna
         };
+
+        const resultadoRegistro = crearUsuario(nuevoUsuario);
         
-        if (crearUsuario(nuevoUsuario)) {
+        if (resultadoRegistro.success) {
             alert("Registro exitoso. ¡Ahora puedes iniciar sesión!");
             navigate("/login");
         } else {
-            alert("Error: El correo ya se encuentra registrado.");
+            alert("Error: " + resultadoRegistro.message);
         }
     };
     

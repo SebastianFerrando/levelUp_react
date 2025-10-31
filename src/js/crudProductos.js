@@ -1,6 +1,3 @@
-// src/js/crudProductos.js
-
-// Leer todos los productos
 export const obtenerProductos = () => {
   return JSON.parse(localStorage.getItem("productos")) || [];
 };

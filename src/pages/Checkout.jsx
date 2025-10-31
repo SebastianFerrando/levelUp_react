@@ -11,12 +11,13 @@ export default function Checkout() {
   const [nombre, setNombre] = useState("");
   const [direccion, setDireccion] = useState("");
   const [tarjeta, setTarjeta] = useState("");
+  const [correo, setCorreo] = useState("")
 
   useEffect(() => {
     const usuario = JSON.parse(localStorage.getItem("usuarioLogeado"));
     if (usuario) {
       setNombre(usuario.nombre || "");
-      setDireccion(usuario.direccion || "");
+      setCorreo(usuario.correo || "");
     }
   }, []);
 
@@ -24,13 +25,10 @@ export default function Checkout() {
     e.preventDefault();
 
     if (nombre.trim() === "" || direccion.trim() === "" || tarjeta.trim() === "") {
-      alert("Por favor completa todos los campos.");
       navigate("/compra-error");
       return;
     }
 
-    // Aquí es donde deberías integrar tu función de validación de formulario, 
-    // pero como aún no la revisamos, mantendremos la validación simple por ahora.
     const claveCarrito = obtenerClaveCarrito();
     localStorage.removeItem(claveCarrito);
 
@@ -45,14 +43,19 @@ export default function Checkout() {
         <input
           value={nombre}
           onChange={(e) => setNombre(e.target.value)}
-          required
         />
 
         <label>Dirección de envío</label>
         <input
           value={direccion}
           onChange={(e) => setDireccion(e.target.value)}
-          required
+        />
+
+        <label>Correo Electronico</label>
+        <input
+          value={correo}
+          type="email"
+          onChange={(e) => setCorreo(e.target.value)}
         />
 
         <label>Número de tarjeta</label>
@@ -60,7 +63,6 @@ export default function Checkout() {
           type="number"
           value={tarjeta}
           onChange={(e) => setTarjeta(e.target.value)}
-          required
         />
 
         <button type="submit" className="btn-ir mt-3 w-100">

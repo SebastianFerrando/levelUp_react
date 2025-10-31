@@ -19,7 +19,7 @@ export const productosIniciales = [
     id: "AC001",
     nombre: "Controlador Inalambrico Xbox Series X",
     precio: 59990,
-    img: "img/prod3.jpg",
+    img: "/img/prod3.jpg",
     descripcion: "Control inalámbrico para Xbox Series X con diseño ergonómico, botones sensibles y conectividad de baja latencia, ideal para sesiones largas de juego con máxima comodidad y precisión.",
     categoria: "accesorios"
   },
